@@ -10,13 +10,11 @@ type ContaCorrente struct {
 }
 
 func main() {
-	contaDaGeovanna := ContaCorrente{}
-	contaDaGeovanna.titular = "Geovanna"
-	contaDaGeovanna.saldo = 500
+	contaDaLizz := ContaCorrente{titular: "Lizz", saldo: 300}
+	contaDoWerm := ContaCorrente{titular: "Werm", saldo: 300}
 
-	fmt.Println(contaDaGeovanna.saldo)
-	fmt.Println(contaDaGeovanna.Sacar(200))
-	fmt.Println(contaDaGeovanna.saldo)
+	fmt.Println(contaDoWerm.Transferir(200, &contaDaLizz))
+	fmt.Println(contaDaLizz, contaDoWerm)
 
 }
 
@@ -38,4 +36,13 @@ func (c *ContaCorrente) Sacar(valorDoSaque float64) string {
 	}
 
 	return "Saldo insuficiente"
+}
+
+func (c *ContaCorrente) Transferir(valorDaTransferencia float64, contaDestino *ContaCorrente) bool {
+	if valorDaTransferencia < c.saldo && valorDaTransferencia > 0 {
+		c.saldo -= valorDaTransferencia
+		contaDestino.saldo += valorDaTransferencia
+		return true
+	}
+	return false
 }
