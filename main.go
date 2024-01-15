@@ -20,10 +20,13 @@ func main() {
 
 }
 
-func (c *ContaCorrente) Depositar(valorDeposito float64) {
+func (c *ContaCorrente) Depositar(valorDeposito float64) (string, float64) {
 	if valorDeposito > 0 {
 		c.saldo += valorDeposito
+		return "Deposito realizado com sucesso!", c.saldo
 	}
+
+	return "Valor do deposito menor que zero", c.saldo
 
 }
 
